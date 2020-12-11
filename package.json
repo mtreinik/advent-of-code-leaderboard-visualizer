@@ -1,0 +1,16 @@
+{
+  "name": "advent-of-code-leaderboard-visualizer",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "git@github.com:mtreinik/advent-of-code-leaderboard-visualizer.git",
+  "author": "Mikko Reinikainen <mikko.reinikainen@iki.fi>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+    "prettier": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "eslint": "^7.15.0"
+  }
+}
