@@ -38,6 +38,7 @@ const refinedData = Object.values(data.members).map((member) => {
     }
   })
   return {
+    id: member.id,
     name: member.name,
     localScore: member.local_score,
     star1Times,
@@ -89,7 +90,7 @@ function pad(val) {
   return val < 10 ? '0' + val : val
 }
 
-function getTooltip(data, star, day, startMillis) {
+function getTooltip(data, highlightedMember, star, day, startMillis) {
   const membersWithIndexes = data.map((member, i) => {
     return { ...member, index: i }
   })
@@ -110,21 +111,22 @@ function getTooltip(data, star, day, startMillis) {
         const hours = Math.floor(totalSeconds / 3600)
         const minutes = Math.floor((totalSeconds - hours * 3600) / 60)
         const seconds = Math.floor(totalSeconds - hours * 3600 - minutes * 60)
+        const glowClass = highlightedMember.id === member.id ? 'glow' : ''
         return (
           '<div class="google-visualization-tooltip-item"><tr>' +
           `<td><div class="google-visualization-tooltip-square" style="background-color: ${
             colors[member.index]
           }"></div></td>` +
-          '<td>' +
+          `<td class="${glowClass}">` +
           member.name +
           '</td>' +
-          '<td class="right">' +
+          `<td class="right ${glowClass}">` +
           (hours ? hours + ':' : '') +
           '</td>' +
-          '<td class="right">' +
+          `<td class="right ${glowClass}">` +
           pad(minutes ? minutes + ':' : '') +
           '</td>' +
-          '<td class="right">' +
+          `<td class="right ${glowClass}">` +
           pad(seconds) +
           '</td>' +
           '</tr>'
@@ -149,11 +151,11 @@ const drawChart = (star, elementId) => () => {
     start.setHours(7, 0, 0, 0)
     const startMillis = start.getTime() / 1000.0
     let times = []
-    const tooltip = getTooltip(sortedData, star, day, startMillis)
     sortedData.forEach((member) => {
       const time = getTime(member, star, day)
       const seconds = time ? Math.max(0, time - startMillis) : null
       times.push(seconds)
+      const tooltip = getTooltip(sortedData, member, star, day, startMillis)
       times.push(tooltip)
     })
     const row = ['day ' + day, ...times]
