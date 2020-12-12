@@ -1,62 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html lang="en">
-<head>
+  <head>
     <title>AoC Leaderboard Visualizer</title>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
     <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <style>
-        body {
-            margin: 1em;
-            color: #cccccc;
-            font-family: "Source Code Pro", monospace;
-            font-size: 16pt;
-            background-color: #0f0f23;
-        }
-        .title {
-            color: #00cc00;
-            font-size: 16pt;
-            text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;
-        }
+      body {
+        margin: 1em;
+        color: #cccccc;
+        font-family: 'Source Code Pro', monospace;
+        font-size: 16pt;
+        background-color: #0f0f23;
+      }
+      .title {
+        color: #00cc00;
+        font-size: 16pt;
+        text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;
+      }
 
-        .star1 {
-            font-size: 30px;
-            color: #9999cc;
-        }
+      .star1 {
+        font-size: 30px;
+        color: #9999cc;
+      }
 
-        .star2 {
-            font-size: 30px;
-            color: #ffff66;
-        }
-        div.google-visualization-tooltip {
-            background-color: #0f0f23;
-            font-size: 15px;
-            border-width: 2px;
-            border-radius: 20px;
-            padding-left: 1em;
-            padding-right: 1em;
-            padding-bottom: 0.5em;
-        }
-        .right {
-            text-align: right;
-        }
-        .glow {
-            text-shadow: 0 0 5px #ffffff;
-        }
-        .heading {
-            margin-top: 3em;
-            text-align: center;
-        }
+      .star2 {
+        font-size: 30px;
+        color: #ffff66;
+      }
+      div.google-visualization-tooltip {
+        background-color: #0f0f23;
+        font-size: 15px;
+        border-width: 2px;
+        border-radius: 20px;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-bottom: 0.5em;
+      }
+      .right {
+        text-align: right;
+      }
+      .glow {
+        text-shadow: 0 0 5px #ffffff;
+      }
+      .heading {
+        margin-top: 3em;
+        text-align: center;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div class="heading">
+      <span class="title">Time to reach first star</span>
+      <span class="star1">*</span>
+    </div>
+    <div id="chart1"></div>
 
-<div class="heading"><span class="title">Time to reach first star</span> <span class="star1">*</span></div>
-<div id="chart1"></div>
-
-<div class="heading"><span class="title">Time to reach both stars</span> <span class="star2">*</span></div>
-<div id="chart2"></div>
-
-</body>
+    <div class="heading">
+      <span class="title">Time to reach both stars</span>
+      <span class="star2">*</span>
+    </div>
+    <div id="chart2"></div>
+  </body>
 </html>
