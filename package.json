@@ -6,11 +6,9 @@
   "author": "Mikko Reinikainen <mikko.reinikainen@iki.fi>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint .",
-    "prettier": "prettier --check ."
+    "lint": "./node_modules/.bin/prettier-standard --lint"
   },
   "devDependencies": {
-    "prettier": "^2.2.1",
-    "eslint": "^7.15.0"
+    "prettier-standard": "^16.4.1"
   }
 }

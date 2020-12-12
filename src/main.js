@@ -1,11 +1,12 @@
-let timeRanges = {}
-const refinedData = Object.values(data.members).map((member) => {
+/* global data, google */
+const timeRanges = {}
+const refinedData = Object.values(data.members).map(member => {
   const completion = member.completion_day_level
-  let star1Times = {}
-  let star2Times = {}
-  Object.keys(completion).forEach((day) => {
-    const star1Time = completion[day]['1']?.get_star_ts
-    const star2Time = completion[day]['2']?.get_star_ts
+  const star1Times = {}
+  const star2Times = {}
+  Object.keys(completion).forEach(day => {
+    const star1Time = completion[day]['1']?.get_star_ts // eslint-disable-line camelcase
+    const star2Time = completion[day]['2']?.get_star_ts // eslint-disable-line camelcase
     if (!timeRanges[day]) {
       timeRanges[day] = {
         star1MinTime: Number.MAX_SAFE_INTEGER,
@@ -82,19 +83,19 @@ const colors = [
   '#743411',
 ]
 
-function getTime(member, star, day) {
+function getTime (member, star, day) {
   return member['star' + star + 'Times'][day]
 }
 
-function pad(val) {
+function pad (val) {
   return val < 10 ? '0' + val : val
 }
 
-function getTooltip(data, highlightedMember, star, day, startMillis) {
+function getTooltip (data, highlightedMember, star, day, startMillis) {
   const membersWithIndexes = data.map((member, i) => {
     return { ...member, index: i }
   })
-  const membersWithTimes = membersWithIndexes.filter((member) =>
+  const membersWithTimes = membersWithIndexes.filter(member =>
     getTime(member, star, day)
   )
   const sortedMembers = membersWithTimes.sort(
@@ -105,7 +106,7 @@ function getTooltip(data, highlightedMember, star, day, startMillis) {
     `<thead><th></th><th style="text-align: left">day ${day}</th><th>h</th><th>min</th><th>s</th></thead>` +
     '<tbody>' +
     sortedMembers
-      .map((member) => {
+      .map(member => {
         const time = getTime(member, star, day)
         const totalSeconds = time ? Math.max(0, time - startMillis) : null
         const hours = Math.floor(totalSeconds / 3600)
@@ -140,18 +141,18 @@ function getTooltip(data, highlightedMember, star, day, startMillis) {
 const drawChart = (star, elementId) => () => {
   const data = new google.visualization.DataTable()
   data.addColumn({ type: 'string', id: 'Day' })
-  sortedData.map((member) => {
+  sortedData.forEach(member => {
     data.addColumn('number', member.localScore + ' ' + member.name)
     data.addColumn({ type: 'string', role: 'tooltip', p: { html: true } })
   })
 
-  Object.keys(timeRanges).forEach((day) => {
+  Object.keys(timeRanges).forEach(day => {
     const timeRange = timeRanges[day]
     const start = new Date(timeRange.star1MinTime * 1000)
     start.setHours(7, 0, 0, 0)
     const startMillis = start.getTime() / 1000.0
-    let times = []
-    sortedData.forEach((member) => {
+    const times = []
+    sortedData.forEach(member => {
       const time = getTime(member, star, day)
       const seconds = time ? Math.max(0, time - startMillis) : null
       times.push(seconds)
